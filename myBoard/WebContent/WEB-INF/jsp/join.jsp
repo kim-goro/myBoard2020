@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/css/common.css" />
 </head>
 <body>
-	<div class="flexContainer flexCenter">
+	<!-- div class="flexContainer flexCenter">
 		<form class="solidForm" id="frm" action="join" method="post" onsubmit="return submitChk()">
 			<div class="marBottom10">
 				<input type="text" name="u_id" placeholder="아이디" value="mic">
@@ -43,9 +43,9 @@
 			</div>
 			<div id="msg"></div>
 		</form>			
-	</div>
+	</div-->
 	
-	<!-- div class="flexContainer flexCenter">
+	<div class="flexContainer flexCenter">
 		<form class="solidForm" id="frm" action="join" method="post" onsubmit="return submitChk()">
 			<div class="marBottom10">
 				<input type="text" name="u_id" placeholder="아이디">
@@ -80,7 +80,7 @@
 			</div>
 			<div id="msg"></div>
 		</form>			
-	</div-->
+	</div>
 	
 	<script>
 		function submitChk() {				
