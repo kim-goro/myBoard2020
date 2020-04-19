@@ -32,8 +32,8 @@
 				<input type="text" name="addr" placeholder="주소">
 			</div>
 			<div class="marBottom10">
-				<label>여<input type="radio" name="sex" value="0" checked></label>
-				<label>남<input type="radio" name="sex" value="1"></label>
+				<label>여성<input type="radio" name="sex" value="0" checked></label>
+				<label for="radio_man">남성</label><input id="radio_man" type="radio" name="sex" value="1">
 			</div>
 			<div class="marBottom10">
 				<input type="text" name="birth" placeholder="생년월일">
@@ -46,17 +46,43 @@
 	</div>
 	
 	<script>
-		function submitChk() {
-			
-			if(frm.u_id.value.length == 0) {
-				msg.innerHTML = '아이디를 입력해 주세요'
+		function submitChk() {				
+			if(itemChk(frm.u_id)) {				
 				return false
-			}
-			
-			var emailRegExp = '/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i';
-
-			
+			} else if(itemChk(frm.u_pw)) {
+				return false
+			} else if(frm.u_pw.value != frm.re_pw.value) {
+				msg.innerHTML = '비밀번호를 확인해 주세요'
+				return false
+			} else if(itemChk(frm.u_nickname)) {
+				return false
+			} else if(itemChk(frm.email)) {
+				return false
+			} else if(itemChk(frm.ph)) {
+				return false
+			} else if(itemChk(frm.addr)) {
+				return false
+			} else if(itemChk(frm.birth)) {
+				return false
+			} else if(emailChk()) {
+				return false
+			}			
 		}
+		
+		function emailChk() {
+			var emailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+			return !emailRegExp.test(frm.email.value)
+		}
+		
+		function itemChk(ele) {
+			if(ele.value.length == 0) {
+				ele.focus()
+				msg.innerHTML = ele.placeholder + '을(를) 입력해 주세요'				
+				return true
+			}
+		}
+		
+		
 	</script>
 </body>
 </html>
