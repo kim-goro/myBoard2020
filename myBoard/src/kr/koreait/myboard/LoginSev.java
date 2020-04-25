@@ -52,9 +52,17 @@ public class LoginSev extends HttpServlet {
 		param.setU_pw(u_pw);
 		
 		int result = UserDAO.doLogin(param);
+		if(result == 1) {			
+			//세션에 값세팅
+			HttpSession hs = request.getSession();
+			hs.setAttribute("loginUser", param);
+			
+			response.sendRedirect("/boardList");
+			return;
+		}
+		
 		response.sendRedirect("/login?error=" + result);
 		
-		System.out.println("result : " + result);
 	}
 
 }
