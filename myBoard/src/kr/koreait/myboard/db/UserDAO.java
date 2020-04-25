@@ -60,8 +60,13 @@ public class UserDAO {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				String u_pw = rs.getString("u_pw");				
-				if(u_pw.equals(param.getU_pw())) {
+				if(u_pw.equals(param.getU_pw())) { //로그인 성공
 					result = 1;
+					
+					String nickNm = rs.getString("u_nickname");
+					param.setU_pw(null);
+					param.setU_nickname(nickNm);
+					
 				} else {
 					result = 3;
 				}
