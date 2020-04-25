@@ -7,6 +7,12 @@
 <title>리스트</title>
 </head>
 <body>
-	리스트 ${ loginUser.u_nickname } 님 환영합니다.
+	<div>
+		${ loginUser.u_nickname }님 환영합니다.
+		<a href="/boardRegmod"><button>글쓰기</button></a>
+	</div>
+	<div>
+		리스트 부분
+	</div>
 </body>
 </html>

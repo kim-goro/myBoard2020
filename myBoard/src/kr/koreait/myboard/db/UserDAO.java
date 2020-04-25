@@ -64,8 +64,11 @@ public class UserDAO {
 					result = 1;
 					
 					String nickNm = rs.getString("u_nickname");
+					int i_user = rs.getInt("i_user");
+					
 					param.setU_pw(null);
 					param.setU_nickname(nickNm);
+					param.setI_user(i_user);
 					
 				} else {
 					result = 3;
