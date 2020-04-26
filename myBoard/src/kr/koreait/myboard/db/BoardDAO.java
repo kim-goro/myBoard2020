@@ -45,7 +45,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 		String sql = " SELECT "
 				+ " A.title, A.hits, A.r_dt, A.m_dt "
-				+ " , A.content, B.u_nickname "
+				+ " , A.content, A.i_user, B.u_nickname "
 				+ " FROM t_board A "
 				+ " INNER JOIN t_user B "
 				+ " ON A.i_user = B.i_user "
@@ -61,6 +61,7 @@ public class BoardDAO {
 			while(rs.next()) {				
 				String title = rs.getString("title");
 				String content = rs.getString("content");
+				int i_user = rs.getInt("i_user");
 				int hits = rs.getInt("hits");
 				String r_dt = rs.getString("r_dt");
 				String m_dt = rs.getString("m_dt");
@@ -70,6 +71,7 @@ public class BoardDAO {
 				vo.setI_board(param.getI_board());
 				vo.setTitle(title);
 				vo.setContent(content);
+				vo.setI_user(i_user);
 				vo.setHits(hits);
 				vo.setR_dt(r_dt);
 				vo.setM_dt(m_dt);
