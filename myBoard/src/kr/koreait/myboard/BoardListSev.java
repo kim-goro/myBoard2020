@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.koreait.myboard.db.BoardDAO;
 import kr.koreait.myboard.vo.UserVO;
 
 @WebServlet("/boardList")
@@ -24,6 +25,10 @@ public class BoardListSev extends HttpServlet {
 			response.sendRedirect("/login");
 			return;
 		}
+		
+		//DB로부터 리스트를 가져온다.
+		
+		request.setAttribute("list", BoardDAO.getBoardList());
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/boardList.jsp");
 		rd.forward(request, response);

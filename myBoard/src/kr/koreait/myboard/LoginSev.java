@@ -61,8 +61,12 @@ public class LoginSev extends HttpServlet {
 			return;
 		}
 		
-		response.sendRedirect("/login?error=" + result);
-		
+		response.sendRedirect("/login?error=" + result);		
 	}
 
 }
+
+
+
+
+

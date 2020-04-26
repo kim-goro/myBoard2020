@@ -9,6 +9,16 @@ public class BoardVO {
 	private String r_dt;
 	private String m_dt;
 	
+	private String u_nickname;
+		
+	public String getU_nickname() {
+		return u_nickname;
+	}
+	public void setU_nickname(String u_nickname) {
+		this.u_nickname = u_nickname;
+	}
+	
+	
 	public int getI_board() {
 		return i_board;
 	}

@@ -35,9 +35,9 @@ public class BoardRegModSev extends HttpServlet {
 	//작업 용도(insert, update)
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession hs = request.getSession();
-		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");
-		
+		UserVO loginUser = (UserVO)hs.getAttribute("loginUser");		
 		int i_user = loginUser.getI_user();
+		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
