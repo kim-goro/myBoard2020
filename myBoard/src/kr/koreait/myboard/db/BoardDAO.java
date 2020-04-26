@@ -37,6 +37,55 @@ public class BoardDAO {
 		return result;
 	}
 	
+	public static BoardVO getBoard(int i_board) {
+		BoardVO vo = null;
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = " SELECT "
+				+ " A.title, A.hits, A.r_dt, A.m_dt "
+				+ " , A.content, B.u_nickname "
+				+ " FROM t_board A "
+				+ " INNER JOIN t_user B "
+				+ " ON A.i_user = B.i_user "
+				+ " WHERE A.i_board = ? "
+				+ " ORDER BY r_dt DESC ";
+		
+		try {
+			con = DbBridge.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, i_board);			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {				
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				int hits = rs.getInt("hits");
+				String r_dt = rs.getString("r_dt");
+				String m_dt = rs.getString("m_dt");
+				String u_nickname = rs.getString("u_nickname");
+								
+				vo = new BoardVO();
+				vo.setI_board(i_board);
+				vo.setTitle(title);
+				vo.setContent(content);
+				vo.setHits(hits);
+				vo.setR_dt(r_dt);
+				vo.setM_dt(m_dt);
+				vo.setU_nickname(u_nickname);				
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbBridge.close(con, ps, rs);
+		}
+		
+		return vo;
+	}
+	
+	
 	public static List<BoardVO> getBoardList() {
 		List<BoardVO> list = new ArrayList();
 		
@@ -80,6 +129,43 @@ public class BoardDAO {
 		}
 		
 		return list;
+	}
+	
+	//조회수 수정, 글 수정 때도 사용
+	public static int updateBoard(BoardVO param) {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = " UPDATE t_board "
+				+ " SET m_dt = now() ";
+		
+		if(param.getHits() > 0) {
+			sql += " , hits = " + param.getHits();
+		}		
+		if(param.getTitle() != null) {
+			sql += " , title = " + param.getTitle();
+		}		
+		if(param.getContent() != null) {
+			sql += " , content = " + param.getContent();
+		}		
+		sql += " WHERE i_board = ? ";
+		
+		
+		try {
+			con = DbBridge.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getI_board());	
+		
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			DbBridge.close(con, ps);
+		}
+		
+		return result;
 	}
 }
 

@@ -13,13 +13,10 @@
 		width: 80%;
 	}
 	
-	th, td {
-		border: 1px solid #000;
-		
-	}
-	.fontCenter {
-		text-align: center;
-	}
+	th, td { border: 1px solid #000; }
+	.fontCenter { text-align: center; }
+	.pointer { 	cursor: pointer; }
+	.trSelected:hover { background-color: #ecf0f1 }
 </style>
 </head>
 <body>
@@ -40,7 +37,7 @@
 			</tr>
 			
 			<c:forEach var="vo" items="${list}">
-			<tr>
+			<tr class="pointer trSelected" onclick="moveToDetail(${vo.i_board}, ${vo.hits})">
 				<td class="fontCenter">${vo.i_board }</td>
 				<td>${vo.title }</td>
 				<td class="fontCenter">${vo.hits }</td>
@@ -50,5 +47,15 @@
 			</c:forEach>
 		</table>
 	</div>
+	<script>
+		function moveToDetail(i_board, hits) {
+			location.href = '/boardDetail?i_board=' + i_board + '&hits=' + hits
+		}
+	</script>
 </body>
 </html>
+
+
+
+
+
