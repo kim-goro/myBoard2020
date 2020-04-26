@@ -6,6 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>리스트</title>
+<style>
+	table { 
+		border: 1px solid #000;
+		border-collapse: collapse;
+		width: 80%;
+	}
+	
+	th, td {
+		border: 1px solid #000;
+		
+	}
+	.fontCenter {
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 	<div>
@@ -24,8 +39,14 @@
 				<th>작성자</th>
 			</tr>
 			
-			<c:forEach var="item" items="${list}">
-			
+			<c:forEach var="vo" items="${list}">
+			<tr>
+				<td class="fontCenter">${vo.i_board }</td>
+				<td>${vo.title }</td>
+				<td class="fontCenter">${vo.hits }</td>
+				<td class="fontCenter">${vo.r_dt }</td>
+				<td class="fontCenter">${vo.u_nickname }</td>
+			</tr>
 			</c:forEach>
 		</table>
 	</div>
