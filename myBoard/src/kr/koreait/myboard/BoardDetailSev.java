@@ -17,21 +17,16 @@ public class BoardDetailSev extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String i_board = request.getParameter("i_board");
-		String hits = request.getParameter("hits");
+		String i_board = request.getParameter("i_board");		
 		int intI_board = Integer.parseInt(i_board);
-		int intHits = Integer.parseInt(hits);
-		
+				
 		System.out.println("i_board: " + intI_board);
-		System.out.println("intHits: " + intHits);
-		
+				
 		BoardVO param = new BoardVO();
-		param.setI_board(intI_board);
-		param.setHits(intHits + 1);
+		param.setI_board(intI_board);		
 		
-		BoardDAO.updateBoard(param);
-			
-		request.setAttribute("detail", BoardDAO.getBoard(intI_board));
+		BoardDAO.updateBoardHits(param);			
+		request.setAttribute("detail", BoardDAO.getBoard(param));
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/boardDetail.jsp");
 		rd.forward(request, response);

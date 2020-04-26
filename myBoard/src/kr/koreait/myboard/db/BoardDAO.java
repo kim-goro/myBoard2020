@@ -37,7 +37,7 @@ public class BoardDAO {
 		return result;
 	}
 	
-	public static BoardVO getBoard(int i_board) {
+	public static BoardVO getBoard(BoardVO param) {
 		BoardVO vo = null;
 		
 		Connection con = null;
@@ -55,7 +55,7 @@ public class BoardDAO {
 		try {
 			con = DbBridge.getCon();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, i_board);			
+			ps.setInt(1, param.getI_board());			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {				
@@ -67,7 +67,7 @@ public class BoardDAO {
 				String u_nickname = rs.getString("u_nickname");
 								
 				vo = new BoardVO();
-				vo.setI_board(i_board);
+				vo.setI_board(param.getI_board());
 				vo.setTitle(title);
 				vo.setContent(content);
 				vo.setHits(hits);
@@ -131,26 +131,15 @@ public class BoardDAO {
 		return list;
 	}
 	
-	//조회수 수정, 글 수정 때도 사용
-	public static int updateBoard(BoardVO param) {
+	//조회수 수정
+	public static int updateBoardHits(BoardVO param) {
 		int result = 0;
 		Connection con = null;
 		PreparedStatement ps = null;
 		
 		String sql = " UPDATE t_board "
-				+ " SET m_dt = now() ";
-		
-		if(param.getHits() > 0) {
-			sql += " , hits = " + param.getHits();
-		}		
-		if(param.getTitle() != null) {
-			sql += " , title = " + param.getTitle();
-		}		
-		if(param.getContent() != null) {
-			sql += " , content = " + param.getContent();
-		}		
-		sql += " WHERE i_board = ? ";
-		
+				+ " SET hits = hits + 1"
+				+ " WHERE i_board = ? ";		
 		
 		try {
 			con = DbBridge.getCon();
